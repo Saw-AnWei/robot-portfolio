@@ -1,0 +1,709 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="机器人运动控制视频作品集">
+  <title>机器人运动控制 | 视频作品集</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      background: #050706;
+      font-family: Inter, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      margin: 0;
+      background: #050706;
+    }
+
+    body {
+      overflow-x: hidden;
+    }
+
+    .cover {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      height: 100svh;
+      min-height: 420px;
+      overflow: hidden;
+      background: #080b09;
+      isolation: isolate;
+    }
+
+    .video-grid {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: repeat(2, minmax(0, 1fr));
+      gap: 2px;
+      background: #050706;
+    }
+
+    .video-cell {
+      position: relative;
+      min-width: 0;
+      min-height: 0;
+      overflow: hidden;
+      background: #111512;
+    }
+
+    .video-cell::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.1));
+    }
+
+    video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      background: #111512;
+    }
+
+    .cover-title {
+      position: absolute;
+      z-index: 2;
+      left: clamp(20px, 3.5vw, 68px);
+      bottom: clamp(24px, 5vw, 76px);
+      max-width: min(650px, calc(100vw - 40px));
+      color: #fff;
+      text-shadow: 0 2px 24px rgba(0, 0, 0, 0.62);
+      pointer-events: none;
+    }
+
+    .cover-title::before {
+      content: "";
+      display: block;
+      width: 44px;
+      height: 3px;
+      margin-bottom: 18px;
+      background: #74e0b1;
+    }
+
+    .cover-title p {
+      margin: 0 0 8px;
+      font-size: clamp(10px, 1vw, 14px);
+      font-weight: 600;
+      line-height: 1.4;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .cover-title h1 {
+      margin: 0;
+      font-size: clamp(28px, 4.2vw, 72px);
+      font-weight: 650;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .media-toggle {
+      position: absolute;
+      z-index: 3;
+      top: max(18px, env(safe-area-inset-top));
+      right: max(18px, env(safe-area-inset-right));
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      padding: 0;
+      color: #fff;
+      background: rgba(8, 12, 10, 0.52);
+      border: 1px solid rgba(255, 255, 255, 0.42);
+      border-radius: 50%;
+      backdrop-filter: blur(10px);
+      cursor: pointer;
+      transition: background 180ms ease, transform 180ms ease;
+    }
+
+    .media-toggle:hover {
+      background: rgba(8, 12, 10, 0.76);
+      transform: scale(1.05);
+    }
+
+    .media-toggle:focus-visible {
+      outline: 3px solid #74e0b1;
+      outline-offset: 3px;
+    }
+
+    .media-toggle svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    .icon-play,
+    .is-paused .icon-pause {
+      display: none;
+    }
+
+    .is-paused .icon-play {
+      display: block;
+    }
+
+    .loading-note {
+      position: absolute;
+      z-index: 1;
+      inset: 50% auto auto 50%;
+      margin: 0;
+      transform: translate(-50%, -50%);
+      color: rgba(255, 255, 255, 0.55);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      white-space: nowrap;
+    }
+
+    .is-ready .loading-note {
+      display: none;
+    }
+
+    .project-section {
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      padding: clamp(72px, 9vw, 140px) clamp(22px, 5vw, 96px);
+      color: #17201c;
+      background: #f1f3ef;
+    }
+
+    .project-inner {
+      width: min(1728px, 100%);
+      margin: 0 auto;
+    }
+
+    .project-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.72fr);
+      align-items: end;
+      gap: clamp(30px, 7vw, 120px);
+      margin-bottom: clamp(32px, 4vw, 60px);
+    }
+
+    .section-index {
+      display: block;
+      margin-bottom: 16px;
+      color: #258463;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+    }
+
+    .project-header h2 {
+      max-width: 900px;
+      margin: 0;
+      font-size: clamp(34px, 4.5vw, 74px);
+      font-weight: 650;
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .project-header p {
+      margin: 0;
+      padding-bottom: 6px;
+      color: #657069;
+      font-size: clamp(14px, 1.25vw, 18px);
+      line-height: 1.8;
+    }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(18px, 2vw, 34px);
+    }
+
+    .comparison-item {
+      min-width: 0;
+    }
+
+    .comparison-video {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: #121713;
+    }
+
+    .comparison-video video {
+      object-fit: cover;
+    }
+
+    .vision-grid {
+      grid-template-columns: minmax(220px, 0.5625fr) minmax(0, 1.7778fr);
+      align-items: start;
+    }
+
+    .vision-video--portrait {
+      aspect-ratio: 9 / 16;
+    }
+
+    .vision-video--landscape {
+      aspect-ratio: 16 / 9;
+    }
+
+    .vision-video video {
+      object-fit: contain;
+      background: #121713;
+    }
+
+    .quadruped-grid {
+      width: min(1050px, 100%);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin: 0 auto;
+    }
+
+    .quadruped-video {
+      aspect-ratio: 9 / 16;
+    }
+
+    .wheeled-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .comparison-label {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 20px;
+      padding-top: 17px;
+      border-top: 1px solid #cdd3cd;
+      margin-top: 14px;
+    }
+
+    .comparison-label h3 {
+      margin: 0;
+      font-size: clamp(18px, 1.5vw, 24px);
+      font-weight: 600;
+      letter-spacing: 0;
+    }
+
+    .comparison-label span {
+      flex: none;
+      color: #7b857f;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 700px) and (orientation: portrait) {
+      .cover {
+        height: auto;
+        min-height: 100svh;
+      }
+
+      .video-grid {
+        position: relative;
+        min-height: 100svh;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, 32vh);
+      }
+
+      .cover-title {
+        position: fixed;
+        bottom: max(24px, env(safe-area-inset-bottom));
+      }
+
+      .project-header {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .comparison-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .vision-video--portrait,
+      .vision-video--landscape {
+        max-width: 100%;
+      }
+
+      .vision-grid .comparison-item:first-child {
+        width: min(100%, 420px);
+      }
+
+      .quadruped-grid {
+        width: 100%;
+        grid-template-columns: 1fr;
+      }
+
+      .quadruped-grid .comparison-item {
+        width: min(100%, 420px);
+        justify-self: center;
+      }
+
+      .wheeled-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="cover" id="cover" aria-labelledby="cover-heading">
+      <div class="video-grid" aria-label="机器人运动演示视频集锦">
+        <div class="video-cell">
+          <p class="loading-note">LOADING VIDEO</p>
+          <video autoplay muted loop playsinline preload="auto" aria-label="机器人运动片段一">
+            <source src="resources/h_run.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-cell">
+          <p class="loading-note">LOADING VIDEO</p>
+          <video autoplay muted loop playsinline preload="auto" aria-label="机器人运动片段二">
+            <source src="resources/h_vision.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-cell">
+          <p class="loading-note">LOADING VIDEO</p>
+          <video autoplay muted loop playsinline preload="auto" aria-label="机器人运动片段三">
+            <source src="resources/m2.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-cell">
+          <p class="loading-note">LOADING VIDEO</p>
+          <video autoplay muted loop playsinline preload="auto" aria-label="机器人运动片段四">
+            <source src="resources/z1w.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+      <div class="cover-title">
+        <p>Robot Locomotion Portfolio</p>
+        <h1 id="cover-heading">机器人运动控制</h1>
+      </div>
+
+      <button class="media-toggle" id="media-toggle" type="button" aria-label="暂停视频" aria-pressed="false">
+        <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h4v16H6zm8 0h4v16h-4z"/></svg>
+        <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 4 13 8L7 20z"/></svg>
+      </button>
+    </section>
+
+    <section class="project-section" aria-labelledby="amp-heading">
+      <div class="project-inner">
+        <header class="project-header">
+          <div>
+            <span class="section-index">01 / HUMANOID</span>
+            <h2 id="amp-heading">AMP 单策略<br>全向拟人走跑</h2>
+          </div>
+          <p>基于对抗运动先验的统一控制策略，实现人形机器人多方向、不同速度下的自然行走与奔跑。</p>
+        </header>
+
+        <div class="comparison-grid">
+          <article class="comparison-item">
+            <div class="comparison-video">
+              <video autoplay muted loop playsinline controls preload="metadata" aria-label="单判别器方案演示">
+                <source src="resources/amp2.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="comparison-label">
+              <h3>单判别器方案</h3>
+              <span>Single Discriminator</span>
+            </div>
+          </article>
+
+          <article class="comparison-item">
+            <div class="comparison-video">
+              <video autoplay muted loop playsinline controls preload="metadata" aria-label="双判别器方案演示">
+                <source src="resources/amp1.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="comparison-label">
+              <h3>双判别器方案</h3>
+              <span>Dual Discriminator</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+ 
+    <section class="project-section" aria-labelledby="dance-heading">
+      <div class="project-inner">
+        <header class="project-header">
+          <div>
+            <span class="section-index">02 / HUMANOID</span>
+            <h2 id="dance-heading">舞蹈与遥操作</h2>
+          </div>
+          <p>基于全身运动跟踪，重定向人体舞蹈动作开展策略训练，并通过实时姿态映射实现机器人全身遥操作。</p>
+        </header>
+
+        <div class="comparison-grid">
+          <article class="comparison-item">
+            <div class="comparison-video">
+              <video autoplay muted loop playsinline controls preload="metadata" aria-label="人形机器人舞蹈演示">
+                <source src="resources/dance.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="comparison-label">
+              <h3>舞蹈</h3>
+              <span>Dance Motion</span>
+            </div>
+          </article>
+
+          <article class="comparison-item">
+            <div class="comparison-video">
+              <video autoplay muted loop playsinline controls preload="metadata" aria-label="人形机器人遥操作演示">
+                <source src="resources/rc.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="comparison-label">
+              <h3>遥操作</h3>
+              <span>Teleoperation</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-section" aria-labelledby="vision-heading">
+      <div class="project-inner">
+        <header class="project-header">
+          <div>
+            <span class="section-index">03 / HUMANOID</span>
+            <h2 id="vision-heading">视觉运动控制</h2>
+          </div>
+          <p>通过视觉感知理解复杂地形，实现人形机器人上下楼梯与跨越高台、沟壑等环境。</p>
+        </header>
+
+        <div class="comparison-grid vision-grid">
+          <article class="comparison-item">
+            <div class="comparison-video vision-video vision-video--portrait">
+              <video autoplay muted loop playsinline controls preload="metadata" aria-label="视觉感知上楼梯真机演示">
+                <source src="resources/vision_stair.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="comparison-label">
+              <h3>视觉感知上楼梯</h3>
+              <span>Verified On Robot</span>
+            </div>
+          </article>
+
+          <article class="comparison-item">
+            <div class="comparison-video vision-video vision-video--landscape">
+              <video autoplay muted loop playsinline controls preload="metadata" aria-label="视觉感知复杂地形仿真演示">
+                <source src="resources/vision_sim.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="comparison-label">
+              <h3>视觉感知复杂地形仿真</h3>
+              <span>Simulation / 待真机部署</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-section" aria-labelledby="quadruped-heading">
+      <div class="project-inner">
+        <header class="project-header">
+          <div>
+            <span class="section-index">04 / QUADRUPED</span>
+            <h2 id="quadruped-heading">四足机器人运动控制</h2>
+          </div>
+          <p>覆盖楼梯上下行与平地运动，展示四足机器人在不同场景下的稳定运动能力。</p>
+        </header>
+
+        <div class="comparison-grid quadruped-grid">
+          <article class="comparison-item">
+            <div class="comparison-video quadruped-video">
+              <video autoplay muted loop playsinline controls preload="metadata" aria-label="四足机器人上楼梯演示">
+                <source src="resources/go2_1.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="comparison-label">
+              <h3>上楼梯</h3>
+              <span>Stair Ascent</span>
+            </div>
+          </article>
+
+          <article class="comparison-item">
+            <div class="comparison-video quadruped-video">
+              <video autoplay muted loop playsinline controls preload="metadata" aria-label="四足机器人下楼梯演示">
+                <source src="resources/go2_2.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="comparison-label">
+              <h3>下楼梯</h3>
+              <span>Stair Descent</span>
+            </div>
+          </article>
+
+          <article class="comparison-item">
+            <div class="comparison-video quadruped-video">
+              <video autoplay muted loop playsinline controls preload="metadata" aria-label="四足机器人平地运动演示">
+                <source src="resources/e1_dog.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="comparison-label">
+              <h3>平地运动</h3>
+              <span>Flat-ground Locomotion</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-section" aria-labelledby="wheeled-heading">
+      <div class="project-inner">
+        <header class="project-header">
+          <div>
+            <span class="section-index">05 / WHEELED QUADRUPED</span>
+            <h2 id="wheeled-heading">轮足机器人运动控制</h2>
+          </div>
+          <p>融合轮式移动效率与足式地形适应能力，实现轮足机器人在平地与复杂地形中的稳定运动。</p>
+        </header>
+
+        <div class="comparison-grid wheeled-grid">
+          <article class="comparison-item">
+            <div class="comparison-video">
+              <video autoplay muted loop playsinline controls preload="metadata" aria-label="轮足机器人平地运动演示">
+                <source src="resources/z1w_1.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="comparison-label">
+              <h3>平地运动</h3>
+              <span>Flat-ground Locomotion</span>
+            </div>
+          </article>
+
+          <article class="comparison-item">
+            <div class="comparison-video">
+              <video autoplay muted loop playsinline controls preload="metadata" aria-label="轮足机器人斜坡与下楼梯演示">
+                <source src="resources/z1w_2.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="comparison-label">
+              <h3>斜坡 / 下楼梯</h3>
+              <span>Slope / Stair Descent</span>
+            </div>
+          </article>
+
+          <article class="comparison-item">
+            <div class="comparison-video">
+              <video autoplay muted loop playsinline controls preload="metadata" aria-label="轮足机器人上楼梯演示">
+                <source src="resources/z1w_3.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="comparison-label">
+              <h3>上楼梯</h3>
+              <span>Stair Ascent</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const cover = document.querySelector("#cover");
+    const coverVideos = [...cover.querySelectorAll("video")];
+    const projectVideos = [...document.querySelectorAll(".project-section video")];
+    const toggle = document.querySelector("#media-toggle");
+    const projectVideoState = new WeakMap();
+    let coverManuallyPaused = false;
+
+    const startVideos = async () => {
+      const results = await Promise.allSettled(coverVideos.map((video) => video.play()));
+      if (results.some((result) => result.status === "fulfilled")) {
+        cover.classList.add("is-ready");
+      }
+    };
+
+    coverVideos.forEach((video) => {
+      video.addEventListener("playing", () => cover.classList.add("is-ready"), { once: true });
+    });
+
+    toggle.addEventListener("click", async () => {
+      coverManuallyPaused = !coverManuallyPaused;
+      cover.classList.toggle("is-paused", coverManuallyPaused);
+      toggle.setAttribute("aria-pressed", String(coverManuallyPaused));
+      toggle.setAttribute("aria-label", coverManuallyPaused ? "播放视频" : "暂停视频");
+
+      if (coverManuallyPaused) {
+        coverVideos.forEach((video) => video.pause());
+      } else {
+        await startVideos();
+      }
+    });
+
+    const playProjectVideo = (video) => {
+      video.play().catch(() => {});
+    };
+
+    const projectVideoObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const video = entry.target;
+        const state = projectVideoState.get(video);
+        state.isVisible = entry.isIntersecting;
+
+        if (entry.isIntersecting) {
+          if (!state.hasEntered || state.pausedByPage) {
+            state.hasEntered = true;
+            state.pausedByPage = false;
+            playProjectVideo(video);
+          }
+        } else if (!video.paused) {
+          state.pausedByPage = true;
+          video.pause();
+        }
+      });
+    }, { threshold: 0.2 });
+
+    projectVideos.forEach((video) => {
+      projectVideoState.set(video, {
+        hasEntered: false,
+        isVisible: false,
+        pausedByPage: false
+      });
+      projectVideoObserver.observe(video);
+    });
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        coverVideos.forEach((video) => video.pause());
+        projectVideos.forEach((video) => {
+          const state = projectVideoState.get(video);
+          if (!video.paused) {
+            state.pausedByPage = true;
+            video.pause();
+          }
+        });
+      } else {
+        if (!coverManuallyPaused) startVideos();
+        projectVideos.forEach((video) => {
+          const state = projectVideoState.get(video);
+          if (state.isVisible && state.pausedByPage) {
+            state.pausedByPage = false;
+            playProjectVideo(video);
+          }
+        });
+      }
+    });
+
+    setInterval(() => {
+      if (coverManuallyPaused || coverVideos.length < 2 || coverVideos[0].paused) return;
+      const leaderTime = coverVideos[0].currentTime;
+      coverVideos.slice(1).forEach((video) => {
+        if (Math.abs(video.currentTime - leaderTime) > 0.12) {
+          video.currentTime = leaderTime;
+        }
+      });
+    }, 1000);
+
+    startVideos();
+  </script>
+</body>
+</html>
