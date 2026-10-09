@@ -1,0 +1,9 @@
+# Only include the website and this ignore configuration at the repository root.
+/*
+!/.gitignore
+!/index.html
+!/resources/
+
+# Ignore local generation assets and Office lock files.
+.ppt_assets/
+~$*.pptx
