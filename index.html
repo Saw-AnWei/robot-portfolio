@@ -220,6 +220,30 @@
       line-height: 1.8;
     }
 
+    .project-source-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 16px;
+      padding-bottom: 4px;
+      color: #258463;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.5;
+      text-decoration: none;
+      border-bottom: 1px solid currentColor;
+      transition: color 180ms ease;
+    }
+
+    .project-source-link:hover {
+      color: #17201c;
+    }
+
+    .project-source-link:focus-visible {
+      outline: 2px solid #258463;
+      outline-offset: 5px;
+    }
+
     .comparison-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -399,7 +423,12 @@
             <span class="section-index">01 / HUMANOID</span>
             <h2 id="amp-heading">AMP 单策略<br>全向拟人走跑</h2>
           </div>
-          <p>基于对抗运动先验的统一控制策略，实现人形机器人多方向、不同速度下的自然行走与奔跑。</p>
+          <div>
+            <p>基于对抗运动先验的统一控制策略，实现人形机器人多方向、不同速度下的自然行走与奔跑。</p>
+            <a class="project-source-link" href="https://github.com/Anwei-Saw/DroidUpE1_mjlab" target="_blank" rel="noopener noreferrer" aria-label="AMP 项目已开源，查看源码（在新标签页打开 GitHub）">
+              本项目已开源 · 查看源码 <span aria-hidden="true">↗</span>
+            </a>
+          </div>
         </header>
 
         <div class="comparison-grid">
