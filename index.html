@@ -266,8 +266,20 @@
     }
 
     .vision-grid {
-      grid-template-columns: minmax(220px, 0.5625fr) minmax(0, 1.7778fr);
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       align-items: start;
+    }
+
+    .vision-grid .comparison-item:first-child {
+      grid-column: span 1;
+    }
+
+    .vision-grid .comparison-item:nth-child(2) {
+      grid-column: span 3;
+    }
+
+    .vision-grid .comparison-item:nth-child(n + 3) {
+      grid-column: span 2;
     }
 
     .vision-video--portrait {
@@ -357,6 +369,10 @@
 
       .vision-grid .comparison-item:first-child {
         width: min(100%, 420px);
+      }
+
+      .vision-grid .comparison-item:nth-child(n) {
+        grid-column: 1 / -1;
       }
 
       .quadruped-grid {
@@ -553,6 +569,30 @@
             <div class="comparison-label">
               <h3>视觉感知复杂地形仿真</h3>
               <span>Simulation / 待真机部署</span>
+            </div>
+          </article>
+
+          <article class="comparison-item">
+            <div class="comparison-video vision-video vision-video--landscape">
+              <video autoplay muted loop playsinline controls preload="metadata" aria-label="视觉感知真机上下楼梯演示">
+                <source src="resources/vision_1.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="comparison-label">
+              <h3>真机上下楼梯</h3>
+              <span>Stair Ascent / Descent</span>
+            </div>
+          </article>
+
+          <article class="comparison-item">
+            <div class="comparison-video vision-video vision-video--landscape">
+              <video autoplay muted loop playsinline controls preload="metadata" aria-label="视觉感知真机高台地形演示">
+                <source src="resources/vision_2.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="comparison-label">
+              <h3>真机高台地形</h3>
+              <span>Elevated Platform Terrain</span>
             </div>
           </article>
         </div>
