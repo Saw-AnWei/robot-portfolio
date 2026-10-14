@@ -271,11 +271,11 @@
     }
 
     .vision-grid .comparison-item:first-child {
-      grid-column: span 1;
+      grid-column: span 3;
     }
 
     .vision-grid .comparison-item:nth-child(2) {
-      grid-column: span 3;
+      grid-column: span 1;
     }
 
     .vision-grid .comparison-item:nth-child(n + 3) {
@@ -367,7 +367,7 @@
         max-width: 100%;
       }
 
-      .vision-grid .comparison-item:first-child {
+      .vision-grid .comparison-item:nth-child(2) {
         width: min(100%, 420px);
       }
 
@@ -549,6 +549,18 @@
 
         <div class="comparison-grid vision-grid">
           <article class="comparison-item">
+            <div class="comparison-video vision-video vision-video--landscape">
+              <video autoplay muted loop playsinline controls preload="metadata" aria-label="视觉感知复杂地形仿真演示">
+                <source src="resources/vision_sim.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="comparison-label">
+              <h3>视觉感知复杂地形仿真</h3>
+              <span>Simulation</span>
+            </div>
+          </article>
+
+          <article class="comparison-item">
             <div class="comparison-video vision-video vision-video--portrait">
               <video autoplay muted loop playsinline controls preload="metadata" aria-label="视觉感知上楼梯真机演示">
                 <source src="resources/vision_stair.mp4" type="video/mp4">
@@ -557,18 +569,6 @@
             <div class="comparison-label">
               <h3>视觉感知上楼梯</h3>
               <span>Verified On Robot</span>
-            </div>
-          </article>
-
-          <article class="comparison-item">
-            <div class="comparison-video vision-video vision-video--landscape">
-              <video autoplay muted loop playsinline controls preload="metadata" aria-label="视觉感知复杂地形仿真演示">
-                <source src="resources/vision_sim.mp4" type="video/mp4">
-              </video>
-            </div>
-            <div class="comparison-label">
-              <h3>视觉感知复杂地形仿真</h3>
-              <span>Simulation / 待真机部署</span>
             </div>
           </article>
 
