@@ -254,6 +254,41 @@
       min-width: 0;
     }
 
+    .project-subsection {
+      margin-top: clamp(44px, 6vw, 84px);
+    }
+
+    .project-subsection-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.72fr);
+      align-items: end;
+      gap: clamp(24px, 5vw, 80px);
+      margin-bottom: clamp(24px, 3vw, 40px);
+    }
+
+    .project-subsection-header h3 {
+      margin: 0;
+      color: #17201c;
+      font-size: clamp(24px, 2.8vw, 40px);
+      font-weight: 620;
+      line-height: 1.2;
+    }
+
+    .project-subsection-header p {
+      margin: 0;
+      color: #657069;
+      font-size: clamp(14px, 1.1vw, 16px);
+      line-height: 1.8;
+    }
+
+    .subsection-index {
+      display: block;
+      margin-bottom: 10px;
+      color: #258463;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
     .comparison-video {
       position: relative;
       aspect-ratio: 16 / 9;
@@ -356,6 +391,11 @@
       .project-header {
         grid-template-columns: 1fr;
         gap: 20px;
+      }
+
+      .project-subsection-header {
+        grid-template-columns: 1fr;
+        gap: 12px;
       }
 
       .comparison-grid {
@@ -472,6 +512,42 @@
             </div>
           </article>
         </div>
+
+        <section class="project-subsection" aria-labelledby="fullscale-heading">
+          <header class="project-subsection-header">
+            <div>
+              <span class="subsection-index">FULL-SCALE HUMANOID SIMULATION</span>
+              <h3 id="fullscale-heading">全尺寸人形机器人全向拟人步态仿真</h3>
+            </div>
+            <p>展示全尺寸 Unitree H2 与众擎 T800 人形机器人的全向拟人行走步态仿真。</p>
+          </header>
+
+          <div class="comparison-grid">
+            <article class="comparison-item">
+              <div class="comparison-video">
+                <video autoplay muted loop playsinline controls preload="metadata" aria-label="Unitree H2 全尺寸人形机器人步态仿真">
+                  <source src="resources/amp_h2.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="comparison-label">
+                <h3>Unitree H2</h3>
+                <span>Full-Scale Humanoid</span>
+              </div>
+            </article>
+
+            <article class="comparison-item">
+              <div class="comparison-video">
+                <video autoplay muted loop playsinline controls preload="metadata" aria-label="众擎 T800 全尺寸人形机器人步态仿真">
+                  <source src="resources/amp_t800.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="comparison-label">
+                <h3>众擎 T800</h3>
+                <span>Full-Scale Humanoid</span>
+              </div>
+            </article>
+          </div>
+        </section>
       </div>
     </section>
  
@@ -593,6 +669,30 @@
             <div class="comparison-label">
               <h3>真机高台地形</h3>
               <span>Elevated Platform Terrain</span>
+            </div>
+          </article>
+
+          <article class="comparison-item">
+            <div class="comparison-video vision-video vision-video--landscape">
+              <video autoplay muted loop playsinline controls preload="metadata" aria-label="视觉感知真机上下楼梯演示片段二">
+                <source src="resources/vision_3.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="comparison-label">
+              <h3>真机上下楼梯</h3>
+              <span>Stair Ascent / Descent</span>
+            </div>
+          </article>
+
+          <article class="comparison-item">
+            <div class="comparison-video vision-video vision-video--landscape">
+              <video autoplay muted loop playsinline controls preload="metadata" aria-label="视觉感知真机上下楼梯演示片段三">
+                <source src="resources/vision_4.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="comparison-label">
+              <h3>真机上下楼梯</h3>
+              <span>Stair Ascent / Descent</span>
             </div>
           </article>
         </div>
