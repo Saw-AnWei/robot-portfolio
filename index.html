@@ -344,6 +344,91 @@
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
+    .other-project-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      max-width: 1240px;
+      margin: 0 auto;
+      align-items: start;
+    }
+
+    .other-project-header {
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 18px;
+    }
+
+    .other-project-caption {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+
+    .comparison-label.other-project-caption span {
+      font-size: 14px;
+      letter-spacing: 0;
+      line-height: 1.6;
+      white-space: normal;
+    }
+
+    .other-project-caption p {
+      margin: 0;
+      color: #657069;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .other-project-item--mecanum {
+      grid-column: 1 / -1;
+      width: 100%;
+    }
+
+    .other-project-gallery {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: start;
+      gap: clamp(18px, 2vw, 34px);
+    }
+
+    .other-project-link {
+      color: #258463;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.6;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .other-project-link:hover {
+      color: #17201c;
+    }
+
+    .other-project-link:focus-visible {
+      outline: 2px solid #258463;
+      outline-offset: 4px;
+    }
+
+    .other-project-photo {
+      aspect-ratio: 4 / 3;
+    }
+
+    .other-project-photo img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .other-project-photo--mecanum {
+      aspect-ratio: auto;
+      overflow: visible;
+      background: transparent;
+    }
+
+    .other-project-photo--mecanum img {
+      height: auto;
+      object-fit: contain;
+    }
+
     .comparison-label {
       display: flex;
       align-items: baseline;
@@ -426,6 +511,19 @@
       }
 
       .wheeled-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .other-project-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .other-project-item--mecanum {
+        grid-column: auto;
+        width: 100%;
+      }
+
+      .other-project-gallery {
         grid-template-columns: 1fr;
       }
     }
@@ -713,7 +811,7 @@
           <article class="comparison-item">
             <div class="comparison-video quadruped-video">
               <video autoplay muted loop playsinline controls preload="metadata" aria-label="四足机器人上楼梯演示">
-                <source src="resources/go2_1.mp4" type="video/mp4">
+                <source src="resources/go2_2.mp4" type="video/mp4">
               </video>
             </div>
             <div class="comparison-label">
@@ -725,7 +823,7 @@
           <article class="comparison-item">
             <div class="comparison-video quadruped-video">
               <video autoplay muted loop playsinline controls preload="metadata" aria-label="四足机器人下楼梯演示">
-                <source src="resources/go2_2.mp4" type="video/mp4">
+                <source src="resources/go2_1.mp4" type="video/mp4">
               </video>
             </div>
             <div class="comparison-label">
@@ -793,6 +891,56 @@
             <div class="comparison-label">
               <h3>上楼梯</h3>
               <span>Stair Ascent</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-section" aria-labelledby="other-projects-heading">
+      <div class="project-inner">
+        <header class="project-header other-project-header">
+          <div>
+            <span class="section-index">06 / OTHER PROJECTS</span>
+            <h2 id="other-projects-heading">其他个人作品</h2>
+          </div>
+        </header>
+
+        <div class="comparison-grid other-project-grid">
+          <article class="comparison-item">
+            <div class="comparison-video other-project-photo">
+              <img src="resources/other/gc_2.jpg" alt="获得中国大学生工程实践与创新能力大赛省级一等奖的物流搬运机器人" loading="lazy">
+            </div>
+            <div class="comparison-label other-project-caption">
+              <h3>物流搬运机器人</h3>
+              <span>中国大学生工程实践与创新能力大赛 · 省级一等奖</span>
+            </div>
+          </article>
+
+          <article class="comparison-item">
+            <div class="comparison-video other-project-photo">
+              <img src="resources/other/gc_8.jpg" alt="获得中国大学生工程实践与创新能力大赛全国一等奖的物流搬运机器人" loading="lazy">
+            </div>
+            <div class="comparison-label other-project-caption">
+              <h3>物流搬运机器人</h3>
+              <span>中国大学生工程实践与创新能力大赛 · 全国一等奖</span>
+            </div>
+          </article>
+
+          <article class="comparison-item other-project-item--mecanum">
+            <div class="other-project-gallery">
+              <div>
+                <div class="comparison-video other-project-photo other-project-photo--mecanum">
+                  <img src="resources/other/ml_1.jpg" alt="麦克纳姆轮小车" loading="lazy">
+                </div>
+                <div class="comparison-label other-project-caption">
+                  <h3>麦克纳姆轮小车</h3>
+                  <p><strong>曾在 B 站发布开源，获得 6000+ 收藏</strong> <a class="other-project-link" href="https://www.bilibili.com/video/BV1WG4y1U7s6/?spm_id_from=333.1387.homepage.video_card.click&amp;vd_source=c36e13ce3122a83b9663225db9215dce" target="_blank" rel="noopener noreferrer">查看 B 站视频</a></p>
+                </div>
+              </div>
+              <div class="comparison-video other-project-photo other-project-photo--mecanum">
+                <img src="resources/other/ml_3.png" alt="麦克纳姆轮小车 B 站视频页面截图" loading="lazy">
+              </div>
             </div>
           </article>
         </div>
